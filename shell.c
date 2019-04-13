@@ -31,21 +31,21 @@ void freeDoub(char **str)
 
 /**
  *token - tokenizes the buffer and returns a double pointer
- *@buff: The input from shell
+ *@input: The input from shell
  *Return: returns an allocated double poiter that contains the inputs token
 */
-char **token(char *buff)
+char **token(char *input)
 {
 	char *tok = NULL;
 	size_t i, wordCount, len;
 	char **args = NULL;
 
-	wordCount = countWords(buff); /*To count the amount of words in input*/
+	wordCount = countWords(input); /*To count the amount of words in input*/
 	args = malloc(sizeof(char *) * wordCount + 1); /*Allocate double array*/
 	if (args == NULL)
 		return (NULL);
 	i = 0;
-	tok = strtok(buff, " ");
+	tok = strtok(input, " ");
 	while (tok != NULL)
 	{
 		len = strLen(tok);
