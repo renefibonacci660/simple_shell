@@ -32,9 +32,10 @@ size_t countWords(char *str);
 char **getEnv(void);
 
 /*------------strFunc.c------------------*/
-int _strcmp(char *s1, char *s2);
+int _strncmp(char *s1, char *s2, int len);
 int strLen(char *str);
 char *_strcat(char *dest, char *src);
 char *_strcpy(char *dest, char *src);
 
+char *_memset(char *s, char b, unsigned int n);
 #endif

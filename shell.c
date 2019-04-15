@@ -24,9 +24,13 @@ void freeDoub(char **str)
 {
 	size_t i;
 
-	for (i = 0; str[i] != NULL; i++)
-		free(str[i]);
-	free(str);
+	if (str != NULL)
+	{
+		for (i = 0; str[i] != NULL; i++)
+			free(str[i]);
+		if (str != NULL)
+			free(str);
+	}
 }
 
 /**
@@ -40,16 +44,16 @@ char **token(char *input)
 	size_t i, wordCount, len;
 	char **args = NULL;
 
-	wordCount = countWords(input); /*To count the amount of words in input*/
-	args = malloc(sizeof(char *) * wordCount + 1); /*Allocate double array*/
+	wordCount = countWords(input) + 1;
+	args = malloc(sizeof(char *) * wordCount); /*Allocate double array*/
 	if (args == NULL)
 		return (NULL);
 	i = 0;
 	tok = strtok(input, " ");
 	while (tok != NULL)
 	{
-		len = strLen(tok);
-		args[i] = malloc(sizeof(char) * len + 1); /*Fo */
+		len = strLen(tok) + 1;
+		args[i] = malloc(sizeof(char) * len);
 		if (args[i] == NULL)
 			return (NULL);
 		_strcpy(args[i], tok);
@@ -77,13 +81,22 @@ char **getInput()
 	if (len == EOF)
 	{
 		free(input);
-		return (NULL);
+		exit(1);
 	}
 	input[len - 1] = '\0';
 	args = token(input);
+	if (args[0] == NULL)
+	{
+		if (args != NULL)
+			free(args);
+		if (input != NULL)
+			free(input);
+		return (NULL);
+	}
 	if (args == NULL)
 		return (NULL);
-	free(input);
+	if (input != NULL)
+		free(input);
 	return (args);
 }
 
@@ -103,7 +116,7 @@ void _shell(void)
 			write(2, "$ ", 3);
 		args = getInput();
 		if (args == NULL)
-			exit(1);
+			continue;
 		process = fork();
 		if (process == -1)
 		{

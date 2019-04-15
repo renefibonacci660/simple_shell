@@ -1,16 +1,15 @@
 #include "holberton.h"
 
 /**
- *_strcmp - Compares two strings and returns the difference of both strings
- *
+ *_strncmp - Compares two strings at a specified length
+ *and returns the difference of both strings
  *@s1: A pointer to the address of the given string.
- *
  *@s2: Another pointer to the adress of the given string.
- *
+ *@len: The length to compare the strings
  *Return: returns the difference of two ascii character values from the two
  *given strings
  */
-int _strcmp(char *s1, char *s2)
+int _strncmp(char *s1, char *s2, int len)
 {
 	int index;
 	char let1;
@@ -20,7 +19,11 @@ int _strcmp(char *s1, char *s2)
 	let2 = '0';
 	let1 = '0';
 	while (s1[index] == s2[index] && s1[index] != '\0' && s1[index] != '0')
+	{
+		if (len - 1 == index)
+			break;
 		index++;
+	}
 	let1 = s1[index];
 	let2 = s2[index];
 	return (let1 - let2);
