@@ -1,6 +1,21 @@
 #include "holberton.h"
 
 /**
+ *_puts - Recived a string from str, uses _putchar
+ * to print every character on the screen. With a new line after
+ *
+ *@str: The string that will be recived from
+ */
+void _puts(char *str)
+{
+	size_t len;
+
+	len = strLen(str);
+	write(1, str, len);
+	write(1, "\n", 1);
+}
+
+/**
  *_strncmp - Compares two strings at a specified length
  *and returns the difference of both strings
  *@s1: A pointer to the address of the given string.
