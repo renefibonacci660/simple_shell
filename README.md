@@ -56,6 +56,7 @@ $
 | mainshell.c | Main entrance and exit function |
 | token.c | Tokenizes input |
 | holberton.h | Header file; contains libaries and function protoypes |
+| AUTHORS | Lists all contributors to repository |
 
 ## Compilation
 All files where compiled on Ubuntu 14.04 LTS.
@@ -66,5 +67,5 @@ All programs and functions were compiled with gcc 4.8.4 using flags -Wall -Werro
 All files have been written in the Betty Style for a cohesive and readable format.
 
 ## Authors
-* **Brittney Goertzen** - [renefibonacci660](https://github.com/renefibonacci660)
+* **Rene Goertzen** - [renefibonacci660](https://github.com/renefibonacci660)
 * **George Solorio** - [GeorgeSolorio](https://github.com/GeorgeSolorio)
