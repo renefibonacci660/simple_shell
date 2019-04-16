@@ -12,7 +12,9 @@ command argument
 Examples:
 
 $ ls -lamp
+
 ./, ../, .git/, README.md, a.out, apples.c, pears.c, pickles/, testfolder/, header.h
+
 $
 
 
