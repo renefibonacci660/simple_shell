@@ -11,20 +11,20 @@ command argument
 
 Examples:
 
-/$ ls -lamp
+home$ ls -lamp
 ./, ../, .git/, README.md, a.out, countWords.c, getEnv.c, getPath.c, holberton.h 
 holberton.h.gch, main.c, mainshell.c, testfolder/, token.c 
-/$ 
+home$ 
 -----------------------------------------------------------
-/$ echo please work
+home$ echo please work
 please work
-/$ 
+home$ 
 -----------------------------------------------------------
-/$ tail -3 test.c
+home$ tail -3 test.c
 These are the
 last
 three lines of this file
-/$ 
+home$ 
 -----------------------------------------------------------
 
 ## File List
