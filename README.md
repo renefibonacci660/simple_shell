@@ -12,6 +12,8 @@ command argument
 Examples:
 
 home$ ls -lamp
+
+home$ ls -lamp
 ./, ../, .git/, README.md, a.out, countWords.c, getEnv.c, getPath.c, holberton.h 
 holberton.h.gch, main.c, mainshell.c, testfolder/, token.c 
 home$ 
