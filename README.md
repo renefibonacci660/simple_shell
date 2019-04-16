@@ -12,8 +12,8 @@ command argument
 Examples:
 
 $ ls -lamp
-./, ../, .git/, README.md, a.out, countWords.c, getEnv.c, getPath.c, holberton.h,
-holberton.h.gch, main.c, mainshell.c, testfolder/, token.c
+./, ../, .git/, README.md, a.out, countWords.c, getEnv.c, getPath.c, holberton.h 
+holberton.h.gch, main.c, mainshell.c, testfolder/, token.c 
 $ 
 -----------------------------------------------------------
 $ echo please work
@@ -45,7 +45,7 @@ All files where compiled on Ubuntu 14.04 LTS.
 
 All programs and functions were compiled with gcc 4.8.4 using flags -Wall -Werror -Wextra and -pedantic.
 
-##Styling
+## Styling
 All files have been written in the Betty Style for a cohesive and readable format.
 
 ## Authors
