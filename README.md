@@ -14,17 +14,17 @@ Examples:
 $ ls -lamp 
 ./, ../, .git/, README.md, a.out, apples.c, pears.c, pickles/, testfolder/, header.h 
 $ 
------------------------------------------------------------------------------
+
 $ echo please work 
 please work 
 $ 
------------------------------------------------------------------------------
+
 $ tail -3 test.c
 These are the 
 last 
 three lines of this file 
 $ 
------------------------------------------------------------------------------
+
 
 
 ## File List
