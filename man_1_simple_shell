@@ -1,0 +1,59 @@
+.\" Manpage for simple_shell
+.\" Contact https://twitter.com/FibonacciRene to correct errors or typos ||
+.\" Contact https://twitter.com/SimplerIsBtr to correct errors or typos.
+.TH man 1 "17 APRIL 2019" "1.0" "simple_shell man page"
+.SH NAME
+.B simple_shell \a -- a simplified version of a command interface that allows the user's input to be interpreted by operating system and then to be executed as specified.
+.SH SYNOPSIS
+Works in Two Modes
+.br .B Interactive Mode \a
+.br $ ./hsh
+.br 
+int _printf(const char *format,...)
+.SH DESCRIPTION
+hsh function description works as printf function in C, it prints ARGUMENT(s) accoring to FORMAT
+FORMAT controls the output are:
+.br
+.B
+/n  prints a new line
+.br
+.B
+%%  prints a single %
+.br
+.B
+%s  prints ARGUMENT as string
+.br
+.B
+%c  prints ARGUMENT as c
+.br
+.B
+%d  prints ARGUMENT as integer
+.br
+.B
+%i prints ARGUMENT as integer
+.br
+.B
+%u prints Argument as unsigned integer
+.br
+.B
+%b prints Argument as binary format
+.br
+.B
+%p prints Argument as memory address format, 0xHEX
+.br
+.B
+%h prints Argument as lowercase hexadecimal format
+.br
+.B
+%H prints Argument as uppercase hexadecimal format
+.br
+.B
+%o prints Argument as octal format
+.br
+.B the function returns the number of characters have been print
+
+.SH BUGS
+No known bugs.
+.SH AUTHOR
+Rene Goertzen rene.goertzen@holbertonschool.com
+George Solorio george.solorio@holbertonschool.com
