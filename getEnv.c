@@ -19,13 +19,13 @@ char **getEnv()
 
 	for (i = 0; environ[i] != NULL; i++)
 	{
-		len = strlen(environ[i]);
+		len = strLen(environ[i]);
 		env[i] = malloc(sizeof(char) * len + 1);
 
 		if (env[i] == NULL)
 			return (NULL);
 
-		strcpy(env[i], environ[i]);
+		_strcpy(env[i], environ[i]);
 	}
 	env[i] = NULL;
 	return (env);

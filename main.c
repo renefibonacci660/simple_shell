@@ -29,7 +29,7 @@ void _shell(void)
 			{
 				if (execve(args[0], args, NULL) == -1)
 				{
-					printError(args[0]);
+					perror(args[0]);
 					freeDoub(args);
 					exit(1);
 				}
