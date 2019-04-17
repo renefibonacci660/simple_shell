@@ -19,11 +19,10 @@ void _shell(void)
 		process = fork();
 		if (process == -1)
 		{
-			perror("Error:\n");
+			printError(args[0]);
 			freeDoub(args);
 			exit(1);
 		}
-		printf("Args is %s\n", args[0]);
 		if (process == 0)
 		{
 			if (getPath(args) == NULL)
