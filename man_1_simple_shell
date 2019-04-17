@@ -3,57 +3,147 @@
 .\" Contact https://twitter.com/SimplerIsBtr to correct errors or typos.
 .TH man 1 "17 APRIL 2019" "1.0" "simple_shell man page"
 .SH NAME
-.B simple_shell \a -- a simplified version of a command interface that allows the user's input to be interpreted by operating system and then to be executed as specified.
+.B simple_shell -- a simplified version of a command interface that allows the user's input to be interpreted by operating system and then to be executed as specified.
 .SH SYNOPSIS
-Works in Two Modes
-.br .B Interactive Mode \a
-.br $ ./hsh
-.br 
-int _printf(const char *format,...)
+.B Works in Two Modes
+.LP
+INTERACTIVE MODE
+.LP
+.RS 3
+$ ./hsh
+.br
+($) /bin/ls -a
+.br
+a.out AUTHORS getEnv.c hsh testfolder testing.c
+.br
+($)
+.br
+($) exit
+.br
+$
+.LP
+.RE
+NON-INTERACTIVE MODE
+.LP
+.RS 3
+home$ echo "/bin/ls -a" | ./hsh
+.br
+a.out AUTHORS getEnv.c hsh testfolder testing.c
+.br
+$
+.br
+$ exit
+.br
+home$
+.RE
+
 .SH DESCRIPTION
-hsh function description works as printf function in C, it prints ARGUMENT(s) accoring to FORMAT
-FORMAT controls the output are:
+This is a version of a simple shell that utilizes a built UNIX command line interpreter that is able to handle command lines with arguments, execute commands found in the PATH as well as preforms the built-ins exit and env. All input in obtained from stdin and written to stdout.
+
 .br
-.B
-/n  prints a new line
+--- Here are the more commonly utilized executables found in the PATH and their usages:
+.LS
+
+\fB ls \fR        Lists the folder and file names in the current working directory.
+
 .br
-.B
-%%  prints a single %
+\fB cat \fR       Concatenates and print files.
+
 .br
-.B
-%s  prints ARGUMENT as string
+\fB head \fR      Displays first 10 (default) lines of specified file.
+
 .br
-.B
-%c  prints ARGUMENT as c
+\fB tail \fR      Displays last 10 (default) lines of specified file.
+
 .br
-.B
-%d  prints ARGUMENT as integer
+\fB pwd \fR       Displays PATH of present working directory.
+
 .br
-.B
-%i prints ARGUMENT as integer
+\fB echo \fR      Outputs to stdout the strings that are passed in stdin.
+
 .br
-.B
-%u prints Argument as unsigned integer
+\fB cp \fR        Copies specified file into existing specified file or creates new if currently
+            non-existent.
+
 .br
-.B
-%b prints Argument as binary format
+\fB mkdir \fR     Creates directory.
+
 .br
-.B
-%p prints Argument as memory address format, 0xHEX
+\fB rm \fR        Removes files and folders.
+
 .br
-.B
-%h prints Argument as lowercase hexadecimal format
+\fB touch \fR     Used to create an empty file; can also \fB touch \fR a file or folder to update access
+            or modification date without opening, saving or closing it.
+
 .br
-.B
-%H prints Argument as uppercase hexadecimal format
+\fB chmod \fR     Allows user to set permissions for read, write and execute for the user, members
+            of your group and others.
+
 .br
-.B
-%o prints Argument as octal format
+\fB mv \fR        Moves a file(s) and/or folder(s) to second argument location.
+
 .br
-.B the function returns the number of characters have been print
+--- Here are the two built-ins available for use in this simple_shell:
+.br
+
+\fB env \fR       Utilized to either used to either print a list of environment variables or run another utility in an
+            altered environment without having to modify the currently existing environment.
+
+.br
+\fB exit \fR      Allows for natural process termination; used to close simple_shell.
+
+.br
+.B --- PLEASE NOTE ---
+Manual pages are available for all of the previously provided PATH system commands and two operable built-ins and contain more details regarding their usage, format and flags that will work in conjunction with these commands in order to execute the users desired outcome properly. Please \fI man (command) \fR for further information.
+
+.SH EXAMPLES
+.br
+.RS 3
+home$ ./hsh
+.br
+$ echo input by user
+.br
+input by user
+.br
+$ head testfilename.c
+.br
+There
+.br
+are
+.br
+ten
+.br
+lines
+.br
+in
+.br
+this
+.br
+file
+.br
+that
+.br
+should
+.br
+print
+.br
+$ ls *.c
+.br
+apples.c head.c tester.c pickles.c names.c
+.br
+$ exit
+.br
+home$
+.RE
+.SH EXIT STATUS
+Returns 0 if successful.
 
 .SH BUGS
 No known bugs.
-.SH AUTHOR
-Rene Goertzen rene.goertzen@holbertonschool.com
-George Solorio george.solorio@holbertonschool.com
+.SH AUTHORS
+- George Solorio george.solorio@holbertonschool.com 
+.br
+- Rene Goertzen rene.goertzen@holbertonschool.com
+
+.SH COPYRIGHT
+Nonexistent: This is freely accessible: user is free to change and redistribute at their leisure. There is NO WARRANTY to the extent permitted by the law.
