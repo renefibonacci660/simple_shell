@@ -134,6 +134,7 @@ apples.c head.c tester.c pickles.c names.c
 $ exit
 .br
 home$
+.br
 .RE
 .SH EXIT STATUS
 Returns 0 if successful.
