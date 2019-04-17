@@ -23,6 +23,7 @@ void _shell(void)
 			freeDoub(args);
 			exit(1);
 		}
+		printf("Args is %s\n", args[0]);
 		if (process == 0)
 		{
 			if (getPath(args) == NULL)

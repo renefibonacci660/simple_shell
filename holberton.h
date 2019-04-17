@@ -59,4 +59,5 @@ char *_strcpy(char *dest, char *src);
 /* token.c */
 char **token(char *input);
 
+int _strcmp(char *s1, char *s2);
 #endif
