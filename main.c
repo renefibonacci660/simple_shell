@@ -1,45 +1,46 @@
 #include "holberton.h"
+
 /**
- *_shell - Creates and uses process to run specified functions.
- * Calls them in a similar way shell would
+ * main - handles singals and runs the shell program
+ *
+ * Return: returns 0 when successful
+ */
+int main(void)
+{
+	signal(SIGINT, signal_handler);
+	_shell();
+	return (0);
+}
+
+/**
+ * _shell - The main shell program
  */
 void _shell(void)
 {
 	pid_t process;
-	char **args;
+	args_t arguments = { NULL, 0 };
 
-	args = NULL;
 	while (1)
 	{
-		if (isatty(0))
-			write(2, "$ ", 3);
-		args = getInput();
-		if (args == NULL)
+		arguments = args();
+		if (arguments.argv == NULL || checkBuiltin(arguments) == 1)
 			continue;
 		process = fork();
 		if (process == -1)
 		{
 			perror("Error:\n");
-			freeDoub(args);
+			freeArgv(arguments.argv);
 			exit(1);
 		}
 		if (process == 0)
 		{
-			if (getPath(args) == NULL)
-			{
-				if (execve(args[0], args, NULL) == -1)
-				{
-					perror(args[0]);
-					freeDoub(args);
-					exit(1);
-				}
-			}
+			_execev(arguments);
 		}
 		else
 		{
 			wait(NULL);
-			freeDoub(args);
+			freeArgv(arguments.argv);
 		}
 	}
-	freeDoub(args);
+	freeArgv(arguments.argv);
 }

@@ -1,30 +1,40 @@
 #include "holberton.h"
 
 /**
- *_puts - Recived a string from str, uses _putchar
- * to print every character on the screen. With a new line after
+ *_strncpy - The function copies the string pointed to src, including the null
+ *terminator, to the buffer pointed to by dest. It copies at most n byes of src
  *
- *@str: The string that will be recived from
+ *@dest: The pointer to the given string's address
+ *@src: The pointer to the given string's address
+ *@n: The first n bytes of src
+ *Return: It returns the pointer to the destination string dest
  */
-void _puts(char *str)
+char *_strncpy(char *dest, char *src, int n)
 {
-	size_t len;
+	int i;
 
-	len = strLen(str);
-	write(1, str, len);
-	write(1, "\n", 1);
+	i = 0;
+	while (i < n)
+	{
+		if (src[i] != '\0')
+			dest[i] = src[i];
+		else
+			while (i < n)
+				dest[i++] = '\0';
+		i++;
+	}
+	return (dest);
 }
 
 /**
- *_strncmp - Compares two strings at a specified length
- *and returns the difference of both strings
+ *_strcmp - Compares two strings and returns the difference of both strings
+ *
  *@s1: A pointer to the address of the given string.
  *@s2: Another pointer to the adress of the given string.
- *@len: The length to compare the strings
  *Return: returns the difference of two ascii character values from the two
  *given strings
  */
-int _strncmp(char *s1, char *s2, int len)
+int _strcmp(char *s1, char *s2)
 {
 	int index;
 	char let1;
@@ -33,12 +43,8 @@ int _strncmp(char *s1, char *s2, int len)
 	index = 0;
 	let2 = '0';
 	let1 = '0';
-	while (s1[index] == s2[index] && s1[index] != '\0' && s1[index] != '0')
-	{
-		if (len - 1 == index)
-			break;
+	while (s1[index] == s2[index] && s1[index] != '\0' && s1[index] != '\0')
 		index++;
-	}
 	let1 = s1[index];
 	let2 = s2[index];
 	return (let1 - let2);
@@ -49,9 +55,7 @@ int _strncmp(char *s1, char *s2, int len)
  * and src strings.
  *
  *@dest: The string that we will append src to
- *
  *@src: The string that will be appended to dest
- *
  *Return: returns the pointer dest after being appended to src
  */
 char *_strcat(char *dest, char *src)
@@ -60,7 +64,7 @@ char *_strcat(char *dest, char *src)
 	int index;
 
 	index = 0;
-	destLen = strLen(dest);
+	destLen = _strlen(dest);
 	while (src[index] != '\0')
 	{
 		dest[index + destLen] = src[index];
@@ -70,23 +74,23 @@ char *_strcat(char *dest, char *src)
 	return (dest);
 }
 
-
 /**
- *strLen - Measures the string from pointer str.
+ *_strlen - Takes in a string and counts
+ * the string length of s.
  *
- *@str: The pointer the points to the adress of the given string.
- *
- *Return: returns the length of the given string.
+ *@s: The string that will be recived and counted
+ *Return: Returns the string length of s
  */
-int strLen(char *str)
+int _strlen(char *s)
 {
 	int len;
 
 	len = 0;
-	while (str[len] != '\0')
+	while (s[len] != '\0')
 		len++;
 	return (len);
 }
+
 
 /**
  *_strcpy - Contains a string from source, which
@@ -99,20 +103,13 @@ int strLen(char *str)
  */
 char *_strcpy(char *dest, char *src)
 {
-	int i;
-	int j;
+	int i, j;
 
-	i = 0;
-	j = 0;
-	if (src)
+	if (src != NULL)
 	{
-		while (src[i] != '\0')
-			i++;
-		while (j <= i)
-		{
+		i = _strlen(src);
+		for (j = 0; j <= i; j++)
 			dest[j] = src[j];
-			j++;
-		}
 	}
 	return (dest);
 }
