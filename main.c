@@ -20,6 +20,7 @@ void _shell(void)
 	pid_t process;
 	args_t arguments = { NULL, 0 };
 
+	populateEnv();
 	while (1)
 	{
 		arguments = args();
@@ -29,7 +30,7 @@ void _shell(void)
 		if (process == -1)
 		{
 			perror("Error:\n");
-			freeArgv(arguments.argv);
+			freeArgs(&arguments);
 			exit(1);
 		}
 		if (process == 0)
@@ -39,8 +40,8 @@ void _shell(void)
 		else
 		{
 			wait(NULL);
-			freeArgv(arguments.argv);
+			freeArgs(&arguments);
 		}
 	}
-	freeArgv(arguments.argv);
+	freeArgs(&arguments);
 }

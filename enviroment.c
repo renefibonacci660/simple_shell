@@ -10,15 +10,17 @@
 char *_getenv(char *name)
 {
 	char *thePath = NULL;
-	size_t i;
+	list_t env = { NULL, NULL, 0 };
+	node_t *node = NULL;
 	int place;
 
 	place = _strlen(name);
-	for (i = 0; environ[i] != NULL; i++)
+	env = getEnvList();
+	for (node = env.head; node != NULL; node = node->next)
 	{
-		if (_strncmp(environ[i], name, place) == 0)
+		if (_strncmp(node->str, name, place) == 0)
 		{
-			thePath = environ[i] + place + 1;
+			thePath = node->str + place + 1;
 			break;
 		}
 	}

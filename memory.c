@@ -16,10 +16,25 @@ void freeList(list_t *list)
 	while (node != NULL)
 	{
 		next = node->next;
-		if (node->str != NULL)
-			free(node->str);
-		free(node);
+		freeNode(node);
 		node = next;
+	}
+}
+
+/**
+ * freeNode - frees the given node
+ *
+ * @node: the node to free and delete
+ */
+void freeNode(node_t *node)
+{
+	node_t *tmp = node;
+
+	if (tmp != NULL)
+	{
+		if (tmp->str != NULL)
+			free(tmp->str);
+		free(tmp);
 	}
 }
 
@@ -37,4 +52,15 @@ void freeArgv(char **argv)
 	for (index = 0; argv[index] != NULL; index++)
 		free(argv[index]);
 	free(argv);
+}
+
+/**
+ * freeArgs - frees argv and sets count to 0
+ *
+ * @arg: The agument to free
+ */
+void freeArgs(args_t *arg)
+{
+	freeArgv(arg->argv);
+	arg->count = 0;
 }

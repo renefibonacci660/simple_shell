@@ -39,7 +39,7 @@ void _execev(args_t args)
 	if (execve(argv[0], argv, NULL) == -1)
 	{
 		perror(argv[0]);
-		freeArgv(argv);
+		freeArgs(&args);
 		exit(1);
 	}
 }

@@ -17,9 +17,11 @@ int checkBuiltin(args_t args)
 	status = 0;
 	argv = args.argv;
 	count = args.count;
-	if (_strcmp(argv[0], "env") == 0 && count == 1)
+	if (args.count == 0)
+		return (1);
+	if (_strcmp(argv[0], "env") == 0)
 	{
-		freeArgv(argv);
+		freeArgs(&args);
 		printEnv();
 		return (1);
 	}
@@ -27,21 +29,25 @@ int checkBuiltin(args_t args)
 	{
 		if (args.count >= 2)
 			status = atoi(argv[1]);
-		freeArgv(argv);
+		freeEnv();
+		freeArgs(&args);
 		_exit_(status);
 	}
+	else if (_strcmp(argv[0], "setenv") == 0)
+	{
+		if (count >= 3)
+			_setenv(argv[1], argv[2]);
+		freeArgs(&args);
+		return (1);
+	}
+	else if (_strcmp(argv[0], "unsetenv") == 0)
+	{
+		if (count >= 2)
+			_unsetenv(argv[1]);
+		freeArgs(&args);
+		return (1);
+	}
 	return (0);
-}
-
-/**
- *printEnv - prints the enviroments
- */
-void printEnv(void)
-{
-	size_t i;
-
-	for (i = 0; environ[i] != NULL; i++)
-		_puts(environ[i]);
 }
 
 /**
@@ -51,5 +57,19 @@ void printEnv(void)
  */
 void _exit_(int status)
 {
-	exit(status);
+	_exit(status);
+}
+
+/**
+ * printEnv - prints the enviroment list
+ */
+void printEnv(void)
+{
+	node_t *node = NULL;
+	list_t env = { NULL, NULL, 0 };
+
+	env = getEnvList();
+	node = env.head;
+	for (node = env.head; node != NULL; node = node->next)
+		_puts(node->str);
 }

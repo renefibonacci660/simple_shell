@@ -1,123 +1,102 @@
 #include "holberton.h"
 
-static char *_findenv();
+static list_t env;
 
 /**
- * _setenv - Sets a variable value from the user
- *
- * @name: The name of the variable to overwrite or append
- * @value: The value to give to the enviromental variable
- * @rewrite: The status that will indicate if variable is to be rewritten
- * Return: Returns 0 if successful, else it return -1
+ * populateEnv - Initiates env linked list from environ
  */
-int _setenv(const char *name, const char *value, int rewrite)
+void populateEnv(void)
 {
-	static int alloced;			/* if allocated space before */
-	char *C;
-	int l_value, offset;
+	size_t index;
 
-	if (*value == '=')			/* no `=' in value */
-		++value;
-	l_value = _strlen((char *)value);
-	C = _findenv((char *)name, &offset);
-	if (C)
+	if (env.count == 0)
 	{
-		if (!rewrite)
-			return (0);
-		if (_strlen(C) >= l_value)  /* old larger; copy over */
-		{
-			while (C)
-			{
-				*C++ = *value++;
-			}
-			return (0);
-		}
+		for (index = 0; environ[index] != NULL; index += 1)
+			append(&env, environ[index]);
+	}
+}
+
+/**
+ * getEnvList - returns a copy of the current enviroment list
+ *
+ * Return: returns a copy of the current envoriment list
+ */
+list_t getEnvList(void)
+{
+	return (env);
+}
+
+/**
+ * freeEnv - frees the entire enviroment list
+ */
+void freeEnv(void)
+{
+	freeList(&env);
+}
+
+/**
+ * _setenv - sets a key and value in the enviroment list
+ *
+ * @key: The key of the enviroment variable
+ * @value: The value for the enviromental variable
+ */
+void _setenv(char *key, char *value)
+{
+	node_t *node = NULL;
+	char *newValue = NULL;
+	char *tmp = NULL;
+	int place = 0;
+
+	place = _strlen(key);
+	newValue = newPath(key, "=", value);
+	for (node = env.head; node != NULL; node = node->next)
+	{
+		if (_strncmp(node->str, key, place) == 0)
+			break;
+	}
+	if (node == NULL)
+	{
+		append(&env, newValue);
 	}
 	else
-	{				/* create new slot */
-		int	cnt;
-		char	**P;
-
-		for (P = environ, cnt = 0; *P; ++P, ++cnt)
-			;
-		if (alloced)
-		{			/* just increase size */
-			environ = (char **)realloc((char *)environ,
-			    (size_t)(sizeof(char *) * (cnt + 2)));
-			if (!environ)
-				return (-1);
-		}
-		else
-		{				/* get new space */
-			alloced = 1;		/* copy old entries into it */
-			P = (char **)malloc((size_t)(sizeof(char *) *
-			    (cnt + 2)));
-			if (!P)
-				return (-1);
-			bcopy(environ, P, cnt * sizeof(char *));
-			environ = P;
-		}
-		environ[cnt + 1] = NULL;
-		offset = cnt;
-	}
-	for (C = (char *)name; *C && *C != '='; ++C)
-		;	/* no `=' in name */
-	environ[offset] =  malloc((size_t)((int)(C - name) + l_value + 2));
-	if (!environ)
-		return (-1);
-	for (C = environ[offset]; (*C = *name++) && *C != '='; ++C)
-		;
-	for (*C++ = '='; (*C++ = *value++); )
-		;
-	return (0);
-}
-
-/**
- * _unsetenv - removes a variable from the enviroment
- *
- * @name: The enviromental variable to remove
- */
-void _unsetenv(const char *name)
-{
-	char **P;
-	int offset;
-
-	while (_findenv((char *)name, &offset)) /* if set multiple times */
 	{
-		for (P = &environ[offset];; ++P)
-		{
-			*P = *(P + 1);
-			if (!(*P))
-				break;
-		}
+		tmp = node->str;
+		node->str = newValue;
+		if (tmp != NULL)
+			free(tmp);
 	}
 }
 
 /**
- * _findenv - looks for the enviromental
+ * _unsetenv - removes an enviroment variable from the
+ * enviroment list
  *
- * @name: The name of the enviromental variable to find
- * @offset: The memory spot
- * Return: returns the found enviromental variable
+ * @key: The enviroment variable to remove from the enviroment list
  */
-static char *_findenv(char *name, int *offset)
+void _unsetenv(char *key)
 {
-	int len;
-	char **P, *C;
+	node_t *node = NULL;
+	node_t *next = NULL;
+	int place = 0;
 
-	for (C = name, len = 0; *C && *C != '='; ++C, ++len)
-		;
-	for (P = environ; *P; ++P)
+	place = _strlen(key);
+	node = env.head;
+	if (node == NULL)
+		return;
+	if (_strncmp(node->str, key, place) == 0)
 	{
-		if (!_strncmp(*P, name, len))
-		{
-			C = *P + len;
-			if (*C == '=')
-			{
-				*offset = (P - environ);
-				return (++C);
-			}
-		}
+		env.head = env.head->next;
+		freeNode(node);
+		return;
 	}
-	return (NULL);
+	for (next = node->next; next != NULL; next = next->next)
+	{
+		if (_strncmp(next->str, key, place) == 0)
+		{
+			node->next = next->next;
+			freeNode(next);
+			break;
+		}
+		node = node->next;
+	}
 }
