@@ -23,6 +23,8 @@ args_t token(char *input)
 		append(&list, tok);
 		tok = strtok(NULL, " \t");
 	}
+	if (list.count == 0)
+		return (args);
 	args.argv = malloc(sizeof(char *) * (list.count + 1));
 	node = list.head;
 	for (index = 0; index < list.count; index += 1)
