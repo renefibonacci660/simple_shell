@@ -118,4 +118,6 @@ char *_strcpy(char *dest, char *src);
 /* stringFunctions3.c */
 void _puts(char *str);
 
+int checkBuiltin2(args_t args);
+
 #endif /* holberton_h */

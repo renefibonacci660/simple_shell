@@ -24,7 +24,8 @@ void _shell(void)
 	while (1)
 	{
 		arguments = args();
-		if (arguments.argv == NULL || checkBuiltin(arguments) == 1)
+		if (arguments.argv == NULL || checkBuiltin(arguments) == 1 ||
+		    checkBuiltin2(arguments) == 1)
 			continue;
 		process = fork();
 		if (process == -1)

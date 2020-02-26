@@ -57,6 +57,7 @@ void _setenv(char *key, char *value)
 	if (node == NULL)
 	{
 		append(&env, newValue);
+		free(newValue);
 	}
 	else
 	{
