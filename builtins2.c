@@ -36,7 +36,11 @@ int checkBuiltin2(args_t args)
 		}
 		getcwd(oldcwd, size);
 		if (chdir(dir) == -1)
-			return (0);
+		{
+			perror(dir);
+			freeArgs(&args);
+			return (1);
+		}
 		getcwd(cwd, size);
 		_setenv("OLDPWD", oldcwd);
 		_setenv("PWD", cwd);
