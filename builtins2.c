@@ -35,7 +35,7 @@ int checkBuiltin2(args_t args)
 			dir = argv[1];
 		}
 		getcwd(oldcwd, size);
-		if (chdir(dir) == -1)
+		if (dir == NULL || chdir(dir) == -1)
 		{
 			perror(dir);
 			freeArgs(&args);

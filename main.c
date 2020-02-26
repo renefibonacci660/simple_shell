@@ -32,7 +32,7 @@ void _shell(void)
 		{
 			perror("Error:\n");
 			freeArgs(&arguments);
-			exit(1);
+			exit(2);
 		}
 		if (process == 0)
 		{

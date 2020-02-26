@@ -36,7 +36,7 @@ void _execev(args_t args)
 	argv = args.argv;
 	if (checkCurrent(argv[0]) == 0)
 		getPath(&argv[0]);
-	if (execve(argv[0], argv, NULL) == -1)
+	if (execve(argv[0], argv, environ) == -1)
 	{
 		perror(argv[0]);
 		freeArgs(&args);
