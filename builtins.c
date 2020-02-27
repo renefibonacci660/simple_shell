@@ -55,7 +55,7 @@ void _exit_(args_t args)
 	{
 		if (isPositiveInt(args.argv[1]) == -1)
 		{
-			fprintf(stderr, "hls: Illegal number: %s\n", args.argv[1]);
+			fprintf(stderr, "./hsh: 1: exit: Illegal number: %s\n", args.argv[1]);
 			args.status = 2;
 		}
 		else
