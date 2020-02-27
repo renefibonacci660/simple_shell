@@ -91,24 +91,21 @@ int is_digit(char s)
  */
 int _atoi(char *str)
 {
-	int num;
-	int sign;
-	int i;
+	int res;
+	int negative;
 
-	i = 0;
-	num = 0;
-	sign = 1;
-	if (!str)
-		return (0);
-	while (is_digit(str[i]) == 0 && str[i] != '\0' && i <= 2147483647)
-		i++;
-	if (str[i - 1] == '-' && is_space(str[i - 2]) != 1)
-		sign = -1;
-	while (is_digit(str[i]) && str[i] != '\0')
+	negative = 1;
+	res = 0;
+	while (is_space(*str))
+		++str;
+	if (*str == '-')
+		negative = -1;
+	if (*str == '-' || *str == '+')
+		++str;
+	while (*str && *str >= '0' && *str <= '9')
 	{
-		num = 10 * num + (str[i] - '0');
-		if (i <= 2147483647)
-			i++;
+		res = res * 10 + (*str - 48);
+		++str;
 	}
-	return (sign * num);
+	return (res * negative);
 }

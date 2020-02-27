@@ -28,7 +28,7 @@ int checkBuiltin(args_t args)
 	else if (_strcmp(argv[0], "exit") == 0)
 	{
 		if (args.count >= 2)
-			status = atoi(argv[1]);
+			status = _atoi(argv[1]);
 		freeEnv();
 		freeArgs(&args);
 		_exit_(status);
@@ -57,7 +57,7 @@ int checkBuiltin(args_t args)
  */
 void _exit_(int status)
 {
-	_exit(status);
+	exit(status);
 }
 
 /**

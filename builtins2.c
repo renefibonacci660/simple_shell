@@ -56,7 +56,6 @@ char *getDir(args_t args)
 		if (_strcmp(args.argv[1], "-") == 0)
 		{
 			dir = _getenv("OLDPWD");
-			printf("dir is %s\n", dir);
 			_puts(dir);
 			return (dir);
 		}
