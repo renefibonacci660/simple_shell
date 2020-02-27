@@ -12,7 +12,7 @@ void _puts(char *str)
 
 	strLen = _strlen(str);
 	write(1, str, strLen);
-	write(1, "\n", 2);
+	write(1, "\n", 1);
 }
 
 /**

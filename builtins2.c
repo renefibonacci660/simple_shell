@@ -20,14 +20,14 @@ int checkBuiltin2(args_t args)
 	if (_strcmp(argv[0], "cd") == 0)
 	{
 		dir = getDir(args);
-		if (dir == NULL)
+		if (dir == NULL || dir[0] == '\0')
 		{
 			freeArgs(&args);
 			return (1);
 		}
 		if (chdir(dir) == -1)
 		{
-			perror(dir);
+			fprintf(stderr, "./hsh: 1: cd: can't cd to %s\n", dir);
 			freeArgs(&args);
 			return (1);
 		}
@@ -55,6 +55,8 @@ char *getDir(args_t args)
 	{
 		if (_strcmp(args.argv[1], "-") == 0)
 		{
+			if (_getenv("OLDPWD") == NULL)
+				_setenv("OLDPWD", _getenv("PWD"));
 			dir = _getenv("OLDPWD");
 			_puts(dir);
 			return (dir);
