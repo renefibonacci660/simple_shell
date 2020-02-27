@@ -10,11 +10,9 @@
  */
 int checkBuiltin(args_t args)
 {
-	int status;
 	size_t count;
 	char **argv = NULL;
 
-	status = 0;
 	argv = args.argv;
 	count = args.count;
 	if (args.count == 0)
@@ -27,11 +25,7 @@ int checkBuiltin(args_t args)
 	}
 	else if (_strcmp(argv[0], "exit") == 0)
 	{
-		if (args.count >= 2)
-			status = _atoi(argv[1]);
-		freeEnv();
-		freeArgs(&args);
-		_exit_(status);
+		_exit_(args);
 	}
 	else if (_strcmp(argv[0], "setenv") == 0)
 	{
@@ -53,10 +47,26 @@ int checkBuiltin(args_t args)
 /**
  *_exit_ - exits with status
  *
- * @status: The status choosen by the user to exit with
+ * @args: The argument that will contain the staus for exit
  */
-void _exit_(int status)
+void _exit_(args_t args)
 {
+	int status = 0;
+
+	if (args.count >= 2)
+	{
+		if (isPositiveInt(args.argv[1]) == -1)
+		{
+			fprintf(stderr, "hls: Illegal number: %s\n", args.argv[1]);
+			status = 2;
+		}
+		else
+		{
+			status = _atoi(args.argv[1]);
+		}
+	}
+	freeEnv();
+	freeArgs(&args);
 	exit(status);
 }
 

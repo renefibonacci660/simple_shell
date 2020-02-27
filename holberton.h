@@ -60,7 +60,7 @@ void _setenv(char *key, char *value);
 void _unsetenv(char *key);
 
 /* builtins.c */
-void _exit_(int status);
+void _exit_(args_t args);
 void printEnv(void);
 int checkBuiltin(args_t args);
 
@@ -118,9 +118,14 @@ char *_strcpy(char *dest, char *src);
 
 /* stringFunctions3.c */
 void _puts(char *str);
+int isPositiveInt(char *str);
+int _isdigit(int c);
+
 
 int checkBuiltin2(args_t args);
 char *getDir(args_t args);
 
 int checkExec(args_t args);
+
+
 #endif /* holberton_h */
