@@ -49,6 +49,7 @@ typedef struct list
 typedef struct args
 {
 	char **argv;
+	int status;
 	size_t count;
 } args_t;
 
