@@ -63,11 +63,12 @@ void _exit_(args_t args)
 		else
 		{
 			status = _atoi(args.argv[1]);
+			args.status = status;
 		}
 	}
 	freeEnv();
 	freeArgs(&args);
-	exit(status);
+	exit(args.status);
 }
 
 /**
