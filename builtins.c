@@ -63,7 +63,7 @@ void _exit_(args_t args)
 			args.status = _atoi(args.argv[1]);
 		}
 	}
-	if (args.status > 256)
+	if (args.status == 512)
 		args.status = 2;
 	freeEnv();
 	freeArgs(&args);
