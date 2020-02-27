@@ -93,6 +93,7 @@ args_t  args(int status)
 	args_t args = { NULL, 0, 0};
 
 	len = size = 0;
+	args.status = status;
 	if (line.count != 0)
 	{
 		args = getArguments();
@@ -117,5 +118,6 @@ args_t  args(int status)
 	token(input);
 	free(input);
 	args = getArguments();
+	args.status = status;
 	return (args);
 }

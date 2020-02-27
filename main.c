@@ -18,19 +18,17 @@ int main(void)
 void _shell(void)
 {
 	pid_t process;
-	int status = 0;
 	args_t arguments = { NULL, 0, 0 };
 
 	populateEnv();
 	while (1)
 	{
-		arguments = args(status);
-		arguments.status = status;
+		arguments = args(arguments.status);
 		if (arguments.argv == NULL || checkBuiltin(arguments) == 1 ||
 		    checkBuiltin2(arguments) == 1)
 			continue;
-		status = checkExec(arguments);
-		if (status == 2)
+		arguments.status = checkExec(arguments);
+		if (arguments.status == 2)
 			continue;
 		process = fork();
 		if (process == -1)
@@ -45,7 +43,7 @@ void _shell(void)
 		}
 		else
 		{
-			wait(&status);
+			wait(&arguments.status);
 			freeArgs(&arguments);
 		}
 	}

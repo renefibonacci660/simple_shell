@@ -44,7 +44,7 @@ typedef struct list
  * contains data of arguments and argument count
  *
  * @argv: An array of strings from the user
- * @status: The status of the argument
+ * @status: The status of the arguments
  * @count: The number of arguments made
  */
 typedef struct args

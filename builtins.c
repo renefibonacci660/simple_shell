@@ -51,21 +51,20 @@ int checkBuiltin(args_t args)
  */
 void _exit_(args_t args)
 {
-	int status = 0;
-
 	if (args.count >= 2)
 	{
 		if (isPositiveInt(args.argv[1]) == -1)
 		{
 			fprintf(stderr, "hls: Illegal number: %s\n", args.argv[1]);
-			status = 2;
+			args.status = 2;
 		}
 		else
 		{
-			status = _atoi(args.argv[1]);
-			args.status = status;
+			args.status = _atoi(args.argv[1]);
 		}
 	}
+	if (args.status > 256)
+		args.status = 2;
 	freeEnv();
 	freeArgs(&args);
 	exit(args.status);
