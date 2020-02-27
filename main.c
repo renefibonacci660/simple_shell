@@ -19,7 +19,7 @@ void _shell(void)
 {
 	pid_t process;
 	int status = 0;
-	args_t arguments = { NULL, 0 };
+	args_t arguments = { NULL, 0, 0 };
 
 	populateEnv();
 	while (1)
