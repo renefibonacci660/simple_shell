@@ -34,12 +34,10 @@ void _execev(args_t args)
 	char **argv;
 
 	argv = args.argv;
-	if (checkCurrent(argv[0]) == 0)
-		getPath(&argv[0]);
 	if (execve(argv[0], argv, environ) == -1)
 	{
 		perror(argv[0]);
 		freeArgs(&args);
-		exit(1);
+		exit(2);
 	}
 }

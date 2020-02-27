@@ -38,12 +38,13 @@ list_t listPath(void)
 	char *tok = NULL;
 	list_t list = { NULL, NULL, 0 };
 
-	env = _getenv("PATH");
+	env = _strdup(_getenv("PATH"));
 	tok = strtok(env, ":");
 	while (tok != NULL)
 	{
 		append(&list, tok);
 		tok = strtok(NULL, ":");
 	}
+	free(env);
 	return (list);
 }

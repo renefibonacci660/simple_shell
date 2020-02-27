@@ -82,9 +82,10 @@ void token(char *input)
 /**
  * args - Recives input from user
  *
+ * @status: The status to exit with
  * Return: returns a double array of input with arguments
  */
-args_t  args(void)
+args_t  args(int status)
 {
 	int len;
 	size_t size;
@@ -107,7 +108,9 @@ args_t  args(void)
 		freeEnv();
 		if (isatty(0))
 			write(2, "\n", 1);
-		exit(0);
+		if (status == 512)
+			status = 2;
+		exit(status);
 	}
 	if (input[len - 1] == '\n')
 		input[len - 1] = '\0';

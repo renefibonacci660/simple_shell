@@ -11,41 +11,56 @@
 int checkBuiltin2(args_t args)
 {
 	char *dir = NULL;
-	char cwd[256];
-	char oldcwd[256];
+	char cwd[1000];
 	char **argv = NULL;
-	size_t size = 1000;
 
 	argv = args.argv;
 	if (args.count == 0)
 		return (1);
 	if (_strcmp(argv[0], "cd") == 0)
 	{
-		if (args.count == 1)
+		dir = getDir(args);
+		if (dir == NULL)
 		{
-			dir = _getenv("HOME");
+			freeArgs(&args);
+			return (1);
 		}
-		else if (args.count == 2 && _strcmp(argv[1], "-") == 0)
-		{
-			dir = _getenv("HOME");
-			_puts(dir);
-		}
-		else if (args.count == 2)
-		{
-			dir = argv[1];
-		}
-		getcwd(oldcwd, size);
-		if (dir == NULL || chdir(dir) == -1)
+		if (chdir(dir) == -1)
 		{
 			perror(dir);
 			freeArgs(&args);
 			return (1);
 		}
-		getcwd(cwd, size);
-		_setenv("OLDPWD", oldcwd);
-		_setenv("PWD", cwd);
+		_setenv("OLDPWD", _getenv("PWD"));
+		_setenv("PWD", getcwd(cwd, 1000));
 		freeArgs(&args);
 		return (1);
 	}
 	return (0);
+}
+
+/**
+ * getDir - gets directory info for cd
+ *
+ * @args: The arguments to check
+ * Return: Returns a directory that chdir can handle, else NULL
+ */
+char *getDir(args_t args)
+{
+	char *dir = NULL;
+
+	if (args.count == 1)
+		dir = _getenv("HOME");
+	else if (args.count >= 2)
+	{
+		if (_strcmp(args.argv[1], "-") == 0)
+		{
+			dir = _getenv("OLDPWD");
+			printf("dir is %s\n", dir);
+			_puts(dir);
+			return (dir);
+		}
+		dir = args.argv[1];
+	}
+	return (dir);
 }

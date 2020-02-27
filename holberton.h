@@ -70,6 +70,7 @@ list_t listPath(void);
 
 /* _execev.c */
 void _execev(args_t args);
+int checkCurrent(char *path);
 
 /* filePath.c */
 char *filePath(char *path, char *command);
@@ -78,7 +79,7 @@ char *newPath(char *key, char *symbol, char *value);
 /* getInput.c */
 args_t getArguments(void);
 list_t tokLine(void);
-args_t args(void);
+args_t args(int status);
 void token(char *input);
 
 /* getPath.c */
@@ -119,5 +120,7 @@ char *_strcpy(char *dest, char *src);
 void _puts(char *str);
 
 int checkBuiltin2(args_t args);
+char *getDir(args_t args);
 
+int checkExec(args_t args);
 #endif /* holberton_h */
