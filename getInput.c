@@ -10,7 +10,7 @@ static list_t line;
 args_t getArguments(void)
 {
 	size_t index;
-	args_t args = { NULL, 0 };
+	args_t args = { NULL, 0, 0 };
 	node_t *node = NULL;
 	list_t list = { NULL, NULL, 0 };
 
@@ -90,7 +90,7 @@ args_t  args(int status)
 	int len;
 	size_t size;
 	char *input = NULL;
-	args_t args = { NULL, 0 };
+	args_t args = { NULL, 0, 0};
 
 	len = size = 0;
 	if (line.count != 0)
