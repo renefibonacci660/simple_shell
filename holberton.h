@@ -8,7 +8,6 @@
 #include <sys/types.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
-#include <errno.h>
 
 extern char **environ;
 
@@ -130,5 +129,7 @@ char *getDir(args_t args);
 
 int checkExec(args_t args);
 
+int argument(void);
+void forkChild(void);
 
 #endif /* holberton_h */

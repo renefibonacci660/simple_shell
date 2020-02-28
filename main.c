@@ -1,5 +1,7 @@
 #include "holberton.h"
 
+static args_t arguments;
+
 /**
  * main - handles singals and runs the shell program
  *
@@ -17,35 +19,58 @@ int main(void)
  */
 void _shell(void)
 {
-	pid_t process;
-	args_t arguments = { NULL, 0, 0 };
+	int status = 0;
 
 	populateEnv();
 	while (1)
 	{
-		arguments = args(arguments.status);
-		if (arguments.argv == NULL || checkBuiltin(arguments) == 1 ||
-		    checkBuiltin2(arguments) == 1)
+		status = argument();
+		if (status == 1)
 			continue;
-		arguments.status = checkExec(arguments);
-		if (arguments.status == 127)
-			continue;
-		process = fork();
-		if (process == -1)
-		{
-			perror("Error:\n");
-			freeArgs(&arguments);
-			exit(1);
-		}
-		if (process == 0)
-		{
-			_execev(arguments);
-		}
-		else
-		{
-			wait(&arguments.status);
-			freeArgs(&arguments);
-		}
+		forkChild();
 	}
 	freeArgs(&arguments);
+}
+
+/**
+ * argument - populates arguments that will be executed
+ *
+ * Return: returns 0 if argument is meant to be dealt with execve else
+ * returns 1
+ */
+int argument(void)
+{
+	arguments = args(arguments.status);
+	if (arguments.argv == NULL || checkBuiltin(arguments) == 1 ||
+	    checkBuiltin2(arguments) == 1)
+		return (1);
+	arguments.status = checkExec(arguments);
+	if (arguments.status == 127)
+		return (1);
+	return (0);
+}
+
+/**
+ * forkChild - Forks a child to execute the argument
+ */
+void forkChild(void)
+{
+	pid_t process;
+
+	process = fork();
+	if (process == -1)
+	{
+		perror("Error:\n");
+		freeArgs(&arguments);
+		exit(1);
+	}
+	if (process == 0)
+	{
+		_execev(arguments);
+	}
+	else
+	{
+		wait(&arguments.status);
+		freeArgs(&arguments);
+	}
 }
