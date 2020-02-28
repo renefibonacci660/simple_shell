@@ -18,9 +18,9 @@ int checkExec(args_t args)
 		getPath(&argv[0]);
 	if (stat(argv[0], &st) != 0)
 	{
-		perror(argv[0]);
+		fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
 		freeArgs(&args);
-		return (2);
+		return (127);
 	}
 	return (0);
 }

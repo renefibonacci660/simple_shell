@@ -28,7 +28,7 @@ void _shell(void)
 		    checkBuiltin2(arguments) == 1)
 			continue;
 		arguments.status = checkExec(arguments);
-		if (arguments.status == 2)
+		if (arguments.status == 127)
 			continue;
 		process = fork();
 		if (process == -1)

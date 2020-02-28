@@ -13,6 +13,8 @@ void getPath(char **cmd)
 
 	list = listPath();
 	node = list.head;
+	if (node == NULL)
+		return;
 	while (node != NULL)
 	{
 		ret = filePath(node->str, (*cmd));
