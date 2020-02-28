@@ -15,7 +15,15 @@ int checkExec(args_t args)
 		return (0);
 	argv = args.argv;
 	if (checkCurrent(argv[0]) == 0)
+	{
+		if (_getenv("PATH=") == NULL)
+		{
+			fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
+			freeArgs(&args);
+			return (127);
+		}
 		getPath(&argv[0]);
+	}
 	if (stat(argv[0], &st) != 0)
 	{
 		fprintf(stderr, "./hsh: 1: %s: not found\n", argv[0]);
