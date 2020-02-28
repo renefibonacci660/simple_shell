@@ -38,7 +38,7 @@ list_t listPath(void)
 	char *tok = NULL;
 	list_t list = { NULL, NULL, 0 };
 
-	env = _strdup(_getenv("PATH"));
+	env = _strdup(_getenv("PATH="));
 	if (env == NULL)
 		return (list);
 	tok = strtok(env, ":");
