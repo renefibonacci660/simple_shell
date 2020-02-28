@@ -20,7 +20,7 @@ char *_getenv(char *name)
 	{
 		if (_strncmp(node->str, name, place) == 0)
 		{
-			thePath = node->str + place + 1;
+			thePath = node->str + place;
 			break;
 		}
 	}

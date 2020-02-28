@@ -31,7 +31,7 @@ int checkBuiltin2(args_t args)
 			freeArgs(&args);
 			return (1);
 		}
-		_setenv("OLDPWD", _getenv("PWD"));
+		_setenv("OLDPWD", _getenv("PWD="));
 		_setenv("PWD", getcwd(cwd, 1000));
 		freeArgs(&args);
 		return (1);
@@ -50,14 +50,14 @@ char *getDir(args_t args)
 	char *dir = NULL;
 
 	if (args.count == 1)
-		dir = _getenv("HOME");
+		dir = _getenv("HOME=");
 	else if (args.count >= 2)
 	{
 		if (_strcmp(args.argv[1], "-") == 0)
 		{
-			if (_getenv("OLDPWD") == NULL)
-				_setenv("OLDPWD", _getenv("PWD"));
-			dir = _getenv("OLDPWD");
+			if (_getenv("OLDPWD=") == NULL)
+				_setenv("OLDPWD", _getenv("PWD="));
+			dir = _getenv("OLDPWD=");
 			_puts(dir);
 			return (dir);
 		}
